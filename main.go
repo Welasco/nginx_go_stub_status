@@ -19,12 +19,23 @@ func main() {
 		go collector.Start()
 	}
 
+	fmt.Println("Sleeping for 10 seconds GetStatus")
+	time.Sleep(10 * time.Second)
+	for _, collector := range logcollector {
+		fmt.Println(collector.GetStatus())
+	}
+
 	fmt.Println("Sleeping for 50 seconds before stopping the collector")
 	time.Sleep(50 * time.Second)
 
 	for _, collector := range logcollector {
 		collector.Stop()
 	}
+
+	for _, collector := range logcollector {
+		fmt.Println(collector.GetStatus())
+	}
+
 	fmt.Println("Sleeping for 50 seconds after stop the collector")
 	time.Sleep(50 * time.Second)
 
